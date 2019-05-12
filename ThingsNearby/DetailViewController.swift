@@ -51,7 +51,8 @@ class DetailViewController: UIViewController {
         let url = URL(string: fullURLString)!
         
         let webViewController = SFSafariViewController(url: url)
-        present(webViewController, animated: true, completion: nil)
+        webViewController.modalPresentationStyle = .overFullScreen
+        navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
     @IBAction func visitedToggled(_ sender: Any) {
