@@ -12,16 +12,16 @@ class PagesStore {
     
     let pagesKey = "PagesKey"
     
-    func pages() -> Pages? {
+    func pages() -> [Page]? {
         
         guard let pagesData = UserDefaults.standard.object(forKey: pagesKey) as? Data else { return nil }
         
-        let pages = try? JSONDecoder().decode(Pages.self, from: pagesData)
+        let pages = try? JSONDecoder().decode([Page].self, from: pagesData)
         
         return pages
     }
     
-    func store(_ pages: Pages) {
+    func store(_ pages: [Page]) {
         
         let pagesJSON = try? JSONEncoder().encode(pages)
         UserDefaults.standard.set(pagesJSON, forKey: pagesKey)

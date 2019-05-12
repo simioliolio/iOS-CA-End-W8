@@ -10,7 +10,7 @@ import UIKit
 
 class ThingsViewController: UITableViewController {
     
-    var pages: Pages?
+    var pages: [Page]?
     
     let location = Location()
     let mediaWiki = MediaWiki()
@@ -39,7 +39,7 @@ class ThingsViewController: UITableViewController {
                 return
             }
             
-            guard let pages = query?.query else {
+            guard let pages = query?.query.pages else {
                 fatalError("no query despite no error")
             }
             
@@ -64,7 +64,7 @@ class ThingsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        guard let numberOfPages = pages?.pages.count else {
+        guard let numberOfPages = pages?.count else {
             return 0
         }
         
@@ -81,7 +81,7 @@ class ThingsViewController: UITableViewController {
             return cell
         }
         
-        let page = pages.pages[indexPath.row]
+        let page = pages[indexPath.row]
         
         cell.textLabel?.text = page.title
         
@@ -118,7 +118,7 @@ class ThingsViewController: UITableViewController {
             return
         }
         
-        let page = source.pages!.pages[indexPath.row]
+        let page = source.pages?[indexPath.row]
         destination.page = page
     }
 
